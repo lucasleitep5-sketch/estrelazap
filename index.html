@@ -4,68 +4,25 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>EstrelaZap — Avaliações 5 estrelas no Google via WhatsApp</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = { theme: { extend: {
-  fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','sans-serif'], display: ['"Plus Jakarta Sans"','Inter','sans-serif'] },
-  colors: { brand: { 50:'#EEF4FF',100:'#DCE7FF',500:'#3B6CF6',600:'#2563EB',700:'#1D4ED8' } },
-  boxShadow: {
-    soft: '0 1px 2px rgba(15,23,42,.04), 0 8px 24px -12px rgba(15,23,42,.12)',
-    lift: '0 2px 4px rgba(15,23,42,.04), 0 28px 56px -20px rgba(37,99,235,.22)',
-    glow: '0 0 0 1px rgba(255,255,255,.08), 0 20px 40px -16px rgba(37,99,235,.55)',
-    phone: '0 50px 100px -30px rgba(15,23,42,.55), 0 0 0 1px rgba(255,255,255,.08)'
-  },
-  transitionTimingFunction: { 'out-expo': 'cubic-bezier(.16,1,.3,1)', 'spring': 'cubic-bezier(.34,1.56,.64,1)' },
-  borderRadius: { '4xl': '2rem' }
-}}}
-</script>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/lucide-react@0.460.0/dist/umd/lucide-react.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>
-  :root{--bg:#F5F7FB;--ink:#0F172A;--brand:#2563EB;--brand-2:#4F46E5;--ease:cubic-bezier(.16,1,.3,1)}
-  *{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-  html{scroll-behavior:smooth}
-  body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1E293B;background-color:var(--bg);
-    background-image:radial-gradient(at 0% 0%,rgba(37,99,235,.10) 0,transparent 45%),radial-gradient(at 100% 0%,rgba(79,70,229,.08) 0,transparent 45%),radial-gradient(at 50% 100%,rgba(245,158,11,.06) 0,transparent 50%);
-    background-attachment:fixed}
-  .font-display{font-feature-settings:"ss01","cv11";letter-spacing:-.02em}
-  ::selection{background:rgba(37,99,235,.18)}
-  ::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:rgba(100,116,139,.35);border-radius:8px}::-webkit-scrollbar-thumb:hover{background:rgba(100,116,139,.6)}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  @keyframes pop{from{transform:scale(.94) translateY(8px);opacity:0}to{transform:none;opacity:1}}
-  @keyframes toastIn{from{opacity:0;transform:translateX(24px) scale(.96)}to{opacity:1;transform:none}}
+  *{-webkit-font-smoothing:antialiased}
+  body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  ::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:8px}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes pop{0%{transform:scale(.96);opacity:0}100%{transform:scale(1);opacity:1}}
   @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
-  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  .fade-up{animation:fadeUp .6s var(--ease) both}
-  .pop{animation:pop .4s var(--ease) both}
-  .toast-in{animation:toastIn .45s var(--ease) both}
-  .stagger>*{opacity:0;animation:fadeUp .7s var(--ease) both}
-  .stagger>*:nth-child(1){animation-delay:.04s}.stagger>*:nth-child(2){animation-delay:.10s}.stagger>*:nth-child(3){animation-delay:.16s}
-  .stagger>*:nth-child(4){animation-delay:.22s}.stagger>*:nth-child(5){animation-delay:.28s}.stagger>*:nth-child(6){animation-delay:.34s}
-  .stagger>*:nth-child(7){animation-delay:.40s}.stagger>*:nth-child(8){animation-delay:.46s}.stagger>*:nth-child(9){animation-delay:.52s}
-  .stagger>*:nth-child(n+10){animation-delay:.58s}
-  .hero{background:linear-gradient(135deg,#1D4ED8 0%,#4338CA 55%,#6D28D9 100%)}
-  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(640px circle at 85% 15%,rgba(255,255,255,.20),transparent 60%),radial-gradient(420px circle at 8% 95%,rgba(251,191,36,.22),transparent 60%)}
-  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
-    background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:32px 32px;
-    mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%)}
-  .sidebar{background:linear-gradient(180deg,#0B1220 0%,#0F172A 55%,#111B33 100%);border-right:1px solid rgba(255,255,255,.06);overflow:hidden}
-  .sidebar::after{content:"";position:absolute;top:-90px;left:-70px;width:280px;height:280px;border-radius:50%;pointer-events:none;filter:blur(24px);
-    background:radial-gradient(circle,rgba(37,99,235,.32),transparent 70%)}
-  .glass{background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
-  .floaty{animation:floaty 6s ease-in-out infinite}
+  .fade-up{animation:fadeUp .35s ease both}.pop{animation:pop .2s ease both}
   .dot{animation:blink 1.2s infinite}.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
   .wa-bg{background-color:#e5ddd5;background-image:radial-gradient(#d9d0c6 1px,transparent 1px);background-size:14px 14px}
-  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
-<body class="text-slate-800">
+<body class="bg-slate-50 text-slate-800">
 <div id="root"></div>
 <script type="text/babel" data-presets="react">
 const { useState, useEffect, useMemo, useRef, useCallback } = React;
@@ -75,6 +32,194 @@ const Icon = ({ name, size = 18, className = '', ...rest }) => {
   if (!C) return <span className={cx('inline-block rounded-full bg-current opacity-30', className)} style={{ width: size, height: size }} />;
   return <C size={size} className={className} {...rest} />;
 };
+
+/* ---------------- CONFIGURAÇÃO SUPABASE & AUTH ---------------- */
+const SUPABASE_URL = 'https://cwirchpkpljzxxzjlgji.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_1c91v0oTyWD4LlyMxYgWCQ__SIy8A2l';
+const supabaseClient = (window.supabase && window.supabase.createClient)
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
+
+// Componente de Autenticação (Login / Cadastro)
+function AuthScreen({ onAuthSuccess, onSkipDemo }) {
+  const [tab, setTab] = useState('login'); // 'login' | 'cadastro'
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [empresa, setEmpresa] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!supabaseClient) {
+      setMsg({ type: 'error', text: 'Supabase não inicializado.' });
+      return;
+    }
+    setLoading(true);
+    setMsg(null);
+
+    if (tab === 'login') {
+      const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email.trim(),
+        password: senha
+      });
+      setLoading(false);
+      if (error) {
+        setMsg({ type: 'error', text: error.message === 'Invalid login credentials' ? 'E-mail ou senha incorretos.' : error.message });
+      } else {
+        onAuthSuccess(data.user, data.session);
+      }
+    } else {
+      if (!empresa.trim()) {
+        setLoading(false);
+        setMsg({ type: 'error', text: 'Informe o nome da sua empresa.' });
+        return;
+      }
+      const { data, error } = await supabaseClient.auth.signUp({
+        email: email.trim(),
+        password: senha,
+        options: {
+          data: {
+            nome_empresa: empresa.trim(),
+            whatsapp: whatsapp.trim()
+          }
+        }
+      });
+      setLoading(false);
+      if (error) {
+        setMsg({ type: 'error', text: error.message });
+      } else {
+        // Criar registro na tabela empresas
+        if (data.user) {
+          try {
+            await supabaseClient.from('empresas').insert([{
+              user_id: data.user.id,
+              nome_empresa: empresa.trim(),
+              whatsapp_empresa: whatsapp.trim(),
+              plano: 'pro',
+              status_assinatura: 'ativo'
+            }]);
+          } catch(err) { console.warn(err); }
+          onAuthSuccess(data.user, data.session);
+        } else {
+          setMsg({ type: 'ok', text: 'Conta criada! Verifique seu e-mail para confirmar seu cadastro.' });
+        }
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+      {/* Background Orbs */}
+      <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-blue-500/15 filter blur-3xl pointer-events-none floaty" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-indigo-500/15 filter blur-3xl pointer-events-none floaty" style={{ animationDelay: '-3s' }} />
+
+      <div className="w-full max-w-md relative z-10">
+        {/* Brand Header */}
+        <div className="text-center mb-8">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 grid place-items-center shadow-xl shadow-amber-500/30 ring-1 ring-white/30 mx-auto mb-4">
+            <Icon name="Star" size={28} className="text-white fill-white" />
+          </div>
+          <h1 className="font-display text-3xl font-bold text-slate-900 tracking-tight">EstrelaZap</h1>
+          <p className="text-sm text-slate-500 mt-1">Multiplique avaliações 5 estrelas no Google via WhatsApp</p>
+        </div>
+
+        {/* Auth Card */}
+        <div className="bg-white/85 backdrop-blur-2xl rounded-3xl border border-white/80 ring-1 ring-slate-900/[.06] shadow-2xl p-6 sm:p-8">
+          {/* Tabs */}
+          <div className="flex bg-slate-100/90 p-1 rounded-xl mb-6">
+            <button
+              type="button"
+              onClick={() => { setTab('login'); setMsg(null); }}
+              className={cx('flex-1 py-2 text-sm font-semibold rounded-lg transition-all duration-200', tab === 'login' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800')}
+            >
+              Fazer Login
+            </button>
+            <button
+              type="button"
+              onClick={() => { setTab('cadastro'); setMsg(null); }}
+              className={cx('flex-1 py-2 text-sm font-semibold rounded-lg transition-all duration-200', tab === 'cadastro' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-800')}
+            >
+              Criar Conta
+            </button>
+          </div>
+
+          {msg && (
+            <div className={cx('p-3.5 rounded-xl text-xs font-medium mb-5 flex items-center gap-2.5', msg.type === 'error' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200')}>
+              <Icon name={msg.type === 'error' ? 'AlertTriangle' : 'CheckCircle2'} size={16} className="shrink-0" />
+              <span>{msg.text}</span>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {tab === 'cadastro' && (
+              <>
+                <Input
+                  label="Nome da sua Empresa / Clínica"
+                  placeholder="Ex: Clínica Sorriso"
+                  value={empresa}
+                  onChange={(e) => setEmpresa(e.target.value)}
+                  required
+                />
+                <Input
+                  label="WhatsApp da Empresa"
+                  placeholder="(11) 99999-9999"
+                  value={whatsapp}
+                  onChange={(e) => setWhatsapp(maskPhone(e.target.value))}
+                  required
+                />
+              </>
+            )}
+
+            <Input
+              label="E-mail profissional"
+              type="email"
+              placeholder="seu@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+
+            <Input
+              label="Senha de acesso"
+              type="password"
+              placeholder="••••••••"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+            />
+
+            <Button
+              type="submit"
+              className="w-full !py-3 font-semibold mt-2"
+              loading={loading}
+              icon={tab === 'login' ? 'LogIn' : 'UserPlus'}
+            >
+              {tab === 'login' ? 'Acessar Painel' : 'Cadastrar Empresa'}
+            </Button>
+          </form>
+
+          {/* Quick Demo Bypass */}
+          <div className="mt-6 pt-5 border-t border-slate-200/60 text-center">
+            <button
+              type="button"
+              onClick={onSkipDemo}
+              className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold inline-flex items-center gap-1.5 transition"
+            >
+              <Icon name="Eye" size={14} />
+              Acessar em modo demonstração (sem login) →
+            </button>
+          </div>
+        </div>
+
+        <p className="text-center text-xs text-slate-400 mt-6">
+          🔒 Conexão segura ponta a ponta com criptografia SSL e Supabase
+        </p>
+      </div>
+    </div>
+  );
+}
 
 /* ---------------- utilidades ---------------- */
 const STORAGE_KEY = 'estrelazap_v1';
@@ -153,25 +298,25 @@ const NAV = [
 ];
 
 /* ---------------- componentes base ---------------- */
-const Card = ({ className = '', children, ...rest }) => <div className={cx('bg-white/85 backdrop-blur-xl rounded-[1.25rem] border border-white/70 ring-1 ring-slate-900/[.05] shadow-soft transition-all duration-500 ease-out-expo', className)} {...rest}>{children}</div>;
+const Card = ({ className = '', children, ...rest }) => <div className={cx('bg-white rounded-2xl border border-slate-200 shadow-sm', className)} {...rest}>{children}</div>;
 const CardHeader = ({ title, sub, right, icon }) => (
   <div className="flex items-start justify-between gap-3 p-5 border-b border-slate-100">
     <div className="flex items-start gap-3">
-      {icon && <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 text-indigo-600 grid place-items-center shrink-0 ring-1 ring-indigo-100/80"><Icon name={icon} size={18} /></div>}
-      <div><h3 className="font-display font-semibold text-slate-900 leading-tight text-[15px]">{title}</h3>{sub && <p className="text-sm text-slate-500 mt-0.5">{sub}</p>}</div>
+      {icon && <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 grid place-items-center shrink-0"><Icon name={icon} size={18} /></div>}
+      <div><h3 className="font-semibold text-slate-900 leading-tight">{title}</h3>{sub && <p className="text-sm text-slate-500 mt-0.5">{sub}</p>}</div>
     </div>{right}
   </div>
 );
-const Badge = ({ children, className = '' }) => <span className={cx('inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide whitespace-nowrap shadow-[inset_0_0_0_1px_rgba(15,23,42,.05)]', className)}>{children}</span>;
+const Badge = ({ children, className = '' }) => <span className={cx('inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap', className)}>{children}</span>;
 const StatusBadge = ({ status }) => { const [label, cls, ic] = STATUS[status] || STATUS.pendente; return <Badge className={cls}><Icon name={ic} size={12} />{label}</Badge>; };
 const Button = ({ variant = 'primary', size = 'md', className = '', loading, children, icon, ...rest }) => {
-  const v = { primary: 'bg-gradient-to-b from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-600 text-white shadow-md shadow-indigo-600/25 hover:shadow-lg hover:shadow-indigo-600/35', secondary: 'bg-white/80 border border-slate-200/80 hover:bg-white hover:border-slate-300 text-slate-700 shadow-sm hover:shadow-soft', ghost: 'hover:bg-slate-100 text-slate-600', success: 'bg-gradient-to-b from-emerald-500 to-emerald-600 hover:from-emerald-400 text-white shadow-md shadow-emerald-600/25', danger: 'bg-red-600 hover:bg-red-700 text-white', dark: 'bg-slate-900 hover:bg-slate-800 text-white shadow-md shadow-slate-900/20' }[variant];
+  const v = { primary: 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-600/20', secondary: 'bg-white border border-slate-200 hover:bg-slate-50 text-slate-700', ghost: 'hover:bg-slate-100 text-slate-600', success: 'bg-emerald-600 hover:bg-emerald-700 text-white', danger: 'bg-red-600 hover:bg-red-700 text-white', dark: 'bg-slate-900 hover:bg-slate-800 text-white' }[variant];
   const s = { sm: 'text-xs px-3 py-1.5', md: 'text-sm px-4 py-2.5', lg: 'text-base px-5 py-3' }[size];
-  return <button className={cx('inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-300 ease-out-expo hover:-translate-y-0.5 active:translate-y-0 active:scale-[.98] disabled:opacity-50 disabled:pointer-events-none', v, s, className)} disabled={loading || rest.disabled} {...rest}>{loading ? <Icon name="Loader2" size={16} className="animate-spin" /> : icon && <Icon name={icon} size={16} />}{children}</button>;
+  return <button className={cx('inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all active:scale-[.98] disabled:opacity-50 disabled:pointer-events-none', v, s, className)} disabled={loading || rest.disabled} {...rest}>{loading ? <Icon name="Loader2" size={16} className="animate-spin" /> : icon && <Icon name={icon} size={16} />}{children}</button>;
 };
 const Input = ({ label, hint, error, className = '', ...rest }) => (
   <label className={cx('block', className)}>{label && <span className="block text-sm font-medium text-slate-700 mb-1.5">{label}</span>}
-    <input className={cx('w-full rounded-xl border bg-white/70 px-4 py-3 text-sm outline-none transition-all duration-300 focus:ring-4 focus:bg-white placeholder:text-slate-400', error ? 'border-red-300 focus:ring-red-100' : 'border-slate-200 focus:border-blue-500 focus:ring-blue-100')} {...rest} />
+    <input className={cx('w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm outline-none transition focus:ring-4', error ? 'border-red-300 focus:ring-red-100' : 'border-slate-200 focus:border-blue-500 focus:ring-blue-100')} {...rest} />
     {error ? <span className="text-xs text-red-600 mt-1 block">{error}</span> : hint && <span className="text-xs text-slate-500 mt-1 block">{hint}</span>}</label>
 );
 const Stars = ({ n = 0, size = 14 }) => <span className="inline-flex gap-0.5">{[1, 2, 3, 4, 5].map(i => <Icon key={i} name="Star" size={size} className={i <= n ? 'text-amber-400 fill-amber-400' : 'text-slate-300'} />)}</span>;
@@ -179,9 +324,9 @@ const Modal = ({ open, onClose, title, children, width = 'max-w-lg' }) => {
   useEffect(() => { const h = (e) => e.key === 'Escape' && onClose(); if (open) window.addEventListener('keydown', h); return () => window.removeEventListener('keydown', h); }, [open]);
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-[60] grid place-items-center p-4 bg-slate-900/40 backdrop-blur-md" onClick={onClose}>
-      <div className={cx('bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl shadow-slate-900/25 ring-1 ring-white/70 w-full pop max-h-[92vh] overflow-y-auto', width)} onClick={e => e.stopPropagation()}>
-        <div className="flex items-center justify-between p-5 border-b border-slate-100"><h3 className="font-display font-semibold text-slate-900 text-lg">{title}</h3><button onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100"><Icon name="X" size={18} /></button></div>
+    <div className="fixed inset-0 z-[60] grid place-items-center p-4 bg-slate-900/50 backdrop-blur-sm" onClick={onClose}>
+      <div className={cx('bg-white rounded-2xl shadow-2xl w-full pop max-h-[92vh] overflow-y-auto', width)} onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between p-5 border-b border-slate-100"><h3 className="font-semibold text-slate-900">{title}</h3><button onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100"><Icon name="X" size={18} /></button></div>
         <div className="p-5">{children}</div>
       </div>
     </div>
@@ -190,7 +335,7 @@ const Modal = ({ open, onClose, title, children, width = 'max-w-lg' }) => {
 const Toasts = ({ toasts }) => (
   <div className="fixed bottom-4 right-4 z-[70] flex flex-col gap-2 w-[92vw] max-w-sm">
     {toasts.map(t => { const c = { success: ['bg-emerald-600', 'CheckCircle2'], warning: ['bg-amber-500', 'AlertTriangle'], error: ['bg-red-600', 'X'], info: ['bg-slate-800', 'Info'] }[t.type] || ['bg-slate-800', 'Info'];
-      return <div key={t.id} className={cx('text-white rounded-2xl px-4 py-3.5 shadow-xl shadow-slate-900/25 ring-1 ring-white/20 flex items-start gap-3 toast-in', c[0])}><Icon name={c[1]} size={18} className="mt-0.5 shrink-0" /><span className="text-sm font-medium">{t.msg}</span></div>; })}
+      return <div key={t.id} className={cx('text-white rounded-xl px-4 py-3 shadow-lg flex items-start gap-3 fade-up', c[0])}><Icon name={c[1]} size={18} className="mt-0.5 shrink-0" /><span className="text-sm font-medium">{t.msg}</span></div>; })}
   </div>
 );
 const FakeQR = ({ seed = 7, size = 180 }) => {
@@ -228,14 +373,14 @@ function Dashboard({ reviews, settings, plan, go }) {
   ];
   const planoAtual = PLANOS.find(p => p.id === plan);
   return (
-    <div className="space-y-6 stagger">
-      <div className="hero rounded-[1.75rem] text-white p-8 md:p-10 relative overflow-hidden shadow-2xl shadow-indigo-900/30">
-        <div className="absolute -right-10 -top-10 w-64 h-64 rounded-full bg-white/10 floaty" /><div className="absolute right-28 -bottom-20 w-44 h-44 rounded-full bg-white/10 floaty" style={{ animationDelay: "-3s" }} />
+    <div className="space-y-6 fade-up">
+      <div className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 md:p-8 relative overflow-hidden">
+        <div className="absolute -right-10 -top-10 w-56 h-56 rounded-full bg-white/10" /><div className="absolute right-24 -bottom-16 w-40 h-40 rounded-full bg-white/10" />
         <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <p className="text-blue-100/80 text-xs font-semibold uppercase tracking-[.16em]">Bem-vindo de volta 👋</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mt-2 leading-[1.1]">{settings.empresa}</h2>
-            <p className="text-blue-100/90 mt-3 max-w-xl text-sm md:text-base leading-relaxed">Você já direcionou <b className="text-white">{google} clientes felizes</b> para avaliar no Google e protegeu sua reputação de <b className="text-white">{retidos} avaliações negativas</b> neste mês.</p>
+            <p className="text-blue-100 text-sm font-medium">Bem-vindo de volta 👋</p>
+            <h2 className="text-2xl md:text-3xl font-bold mt-1">{settings.empresa}</h2>
+            <p className="text-blue-100 mt-2 max-w-xl text-sm md:text-base">Você já direcionou <b className="text-white">{google} clientes felizes</b> para avaliar no Google e protegeu sua reputação de <b className="text-white">{retidos} avaliações negativas</b> neste mês.</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-2">
             <Button variant="dark" className="bg-white/15 hover:bg-white/25 backdrop-blur" icon="Send" onClick={() => go('disparar')}>Disparar avaliação</Button>
@@ -246,17 +391,17 @@ function Dashboard({ reviews, settings, plan, go }) {
       {settings.whatsappStatus !== 'conectado' && (
         <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 text-amber-800 px-4 py-3 text-sm"><Icon name="WifiOff" size={18} /><span className="flex-1">Seu WhatsApp ainda não está conectado. Os disparos estão em <b>modo simulação</b>.</span><Button size="sm" variant="secondary" onClick={() => go('config')}>Conectar agora</Button></div>
       )}
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 stagger">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
         {kpis.map(k => (
-          <Card key={k.label} className="p-6 group hover:-translate-y-1 hover:shadow-lift hover:ring-indigo-200/60">
-            <div className={cx('w-11 h-11 rounded-2xl grid place-items-center mb-4 transition-transform duration-500 ease-spring group-hover:scale-110 group-hover:-rotate-3', k.color)}><Icon name={k.icon} size={20} /></div>
-            <p className="font-display text-3xl font-bold text-slate-900 tabular-nums">{k.value}</p>
-            <p className="text-sm font-medium text-slate-700 mt-1">{k.label}</p>
+          <Card key={k.label} className="p-5 hover:shadow-md transition-shadow">
+            <div className={cx('w-10 h-10 rounded-xl grid place-items-center mb-3', k.color)}><Icon name={k.icon} size={20} /></div>
+            <p className="text-2xl font-bold text-slate-900">{k.value}</p>
+            <p className="text-sm font-medium text-slate-700 mt-0.5">{k.label}</p>
             <p className="text-xs text-slate-500">{k.sub}</p>
           </Card>
         ))}
       </div>
-      <div className="grid lg:grid-cols-5 gap-6 stagger">
+      <div className="grid lg:grid-cols-5 gap-6">
         <Card className="lg:col-span-2">
           <CardHeader title="Distribuição de notas" sub="Como seus clientes estão avaliando" icon="Star" />
           <div className="p-5 space-y-3">
@@ -275,9 +420,9 @@ function Dashboard({ reviews, settings, plan, go }) {
         </Card>
         <Card className="lg:col-span-3">
           <CardHeader title="Últimas avaliações recebidas" sub="Atividade em tempo real" icon="Bell" right={<Button size="sm" variant="ghost" icon="ArrowRight" onClick={() => go('historico')}>Ver todas</Button>} />
-          <ul className="divide-y divide-slate-100/80 stagger">
+          <ul className="divide-y divide-slate-100">
             {recentes.map(r => (
-              <li key={r.id} className="flex items-center gap-3 px-5 py-3.5 hover:bg-indigo-50/40 transition-colors duration-300">
+              <li key={r.id} className="flex items-center gap-3 px-5 py-3 hover:bg-slate-50">
                 <div className="w-9 h-9 rounded-full bg-slate-100 grid place-items-center text-xs font-bold text-slate-600 shrink-0">{r.cliente.replace('Dr. ', '').split(' ').map(x => x[0]).slice(0, 2).join('')}</div>
                 <div className="flex-1 min-w-0"><p className="text-sm font-medium text-slate-800 truncate">{r.cliente}</p><p className="text-xs text-slate-500 truncate">{r.comentario || r.obs || 'Sem comentário'}</p></div>
                 <div className="hidden sm:block">{r.nota ? <Stars n={r.nota} /> : <span className="text-xs text-slate-400">aguardando</span>}</div>
@@ -348,12 +493,12 @@ function Disparar({ reviews, setReviews, settings, push, go }) {
   };
   const feed = [...reviews].sort((a, b) => new Date(b.data) - new Date(a.data)).slice(0, 8);
   return (
-    <div className="grid lg:grid-cols-5 gap-6 stagger">
+    <div className="grid lg:grid-cols-5 gap-6 fade-up">
       <div className="lg:col-span-3 space-y-6">
         {settings.whatsappStatus !== 'conectado' && <div className="flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 text-amber-800 px-4 py-3 text-sm"><Icon name="WifiOff" size={18} /><span className="flex-1">WhatsApp desconectado — os disparos abaixo serão <b>simulados</b>.</span><Button size="sm" variant="secondary" onClick={() => go('config')}>Conectar</Button></div>}
         <Card>
-          <div className="p-2 border-b border-slate-100 flex gap-1 bg-slate-50/60 rounded-t-[1.25rem]">
-            {[['individual', 'Envio individual rápido', 'UserPlus'], ['massa', 'Importação em massa', 'FileSpreadsheet']].map(([id, label, ic]) => <button key={id} onClick={() => setModo(id)} className={cx('flex-1 flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium transition', modo === id ? 'bg-white shadow-soft text-blue-700' : 'text-slate-600 hover:bg-white/60 hover:text-slate-900')}><Icon name={ic} size={16} />{label}</button>)}
+          <div className="p-2 border-b border-slate-100 flex gap-1 bg-slate-50/60 rounded-t-2xl">
+            {[['individual', 'Envio individual rápido', 'UserPlus'], ['massa', 'Importação em massa', 'FileSpreadsheet']].map(([id, label, ic]) => <button key={id} onClick={() => setModo(id)} className={cx('flex-1 flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium transition', modo === id ? 'bg-white shadow-sm text-blue-700' : 'text-slate-600 hover:bg-white/60')}><Icon name={ic} size={16} />{label}</button>)}
           </div>
           {modo === 'individual' ? (
             <form onSubmit={enviarIndividual} className="p-5 space-y-4">
@@ -384,7 +529,7 @@ function Disparar({ reviews, setReviews, settings, push, go }) {
               </div>
               {lista.length > 0 && (
                 <div className="rounded-xl border border-slate-200 overflow-hidden">
-                  <div className="max-h-64 overflow-auto"><table className="w-full text-sm"><thead className="bg-slate-50/90 backdrop-blur text-slate-500 text-[11px] uppercase tracking-[.12em] font-semibold sticky top-0"><tr><th className="text-left px-4 py-2">Nome</th><th className="text-left px-4 py-2">WhatsApp</th><th className="text-left px-4 py-2 hidden sm:table-cell">Obs.</th><th className="px-4 py-2">Válido</th></tr></thead>
+                  <div className="max-h-64 overflow-auto"><table className="w-full text-sm"><thead className="bg-slate-50 text-slate-600 text-xs uppercase sticky top-0"><tr><th className="text-left px-4 py-2">Nome</th><th className="text-left px-4 py-2">WhatsApp</th><th className="text-left px-4 py-2 hidden sm:table-cell">Obs.</th><th className="px-4 py-2">Válido</th></tr></thead>
                     <tbody className="divide-y divide-slate-100">{lista.map(c => <tr key={c.id} className={!c.ok ? 'bg-red-50/50' : ''}><td className="px-4 py-2 font-medium">{c.nome}</td><td className="px-4 py-2">{c.fone || '—'}</td><td className="px-4 py-2 hidden sm:table-cell text-slate-500">{c.obs}</td><td className="px-4 py-2 text-center">{c.ok ? <Icon name="CheckCircle2" size={16} className="text-emerald-600 inline" /> : <Icon name="AlertTriangle" size={16} className="text-red-500 inline" />}</td></tr>)}</tbody></table></div>
                   <div className="p-4 bg-slate-50 border-t border-slate-200">
                     {lote ? <div><div className="flex justify-between text-sm mb-1"><span className="font-medium">Enviando com delay inteligente (anti-bloqueio)…</span><span>{lote.feito}/{lote.total}</span></div><div className="h-2 rounded-full bg-slate-200 overflow-hidden"><div className="h-full bg-blue-600 transition-all" style={{ width: `${lote.feito / lote.total * 100}%` }} /></div></div>
@@ -398,9 +543,9 @@ function Disparar({ reviews, setReviews, settings, push, go }) {
       </div>
       <Card className="lg:col-span-2 self-start">
         <CardHeader title="Disparos recentes" sub="Status em tempo real" icon="Activity" />
-        <ul className="divide-y divide-slate-100/80 stagger">
+        <ul className="divide-y divide-slate-100">
           {feed.map(r => (
-            <li key={r.id} className="px-5 py-3.5 flex items-center gap-3 hover:bg-indigo-50/40 transition-colors duration-300">
+            <li key={r.id} className="px-5 py-3 flex items-center gap-3 fade-up">
               <div className={cx('w-2.5 h-2.5 rounded-full shrink-0', r.status === 'pendente' ? 'bg-slate-300 animate-pulse' : r.status === 'enviado' ? 'bg-blue-500 animate-pulse' : r.status === 'google' ? 'bg-emerald-500' : r.status === 'retido' ? 'bg-red-500' : 'bg-amber-400')} />
               <div className="flex-1 min-w-0"><p className="text-sm font-medium truncate">{r.cliente}</p><p className="text-xs text-slate-500">{r.whatsapp} · {fmtDate(r.data)}</p></div>
               <StatusBadge status={r.status} />
@@ -439,7 +584,7 @@ function Simulador({ reviews, setReviews, settings, push }) {
   };
   const enviarMotivo = async (e) => { e && e.preventDefault(); if (!motivo.trim()) return; userSay(motivo); setStep('processando'); await botSay(fill(settings.templates.agradecimento, vars), { alerta: true }); addLog(`Alerta enviado ao gerente (${settings.gerenteWhatsapp})`, 'warn'); registrar({ nota, status: 'retido', comentario: motivo }); push('Reclamação retida internamente — Google protegido 🔒', 'warning'); setStep('finalizado'); };
   return (
-    <div className="grid lg:grid-cols-5 gap-6 stagger">
+    <div className="grid lg:grid-cols-5 gap-6 fade-up">
       <div className="lg:col-span-2 space-y-4 order-2 lg:order-1">
         <Card>
           <CardHeader title="Contato de teste" sub="Quem vai receber a mensagem?" icon="Smartphone" />
@@ -452,7 +597,7 @@ function Simulador({ reviews, setReviews, settings, push }) {
         </Card>
         <Card>
           <CardHeader title="Log do sistema" sub="O que o EstrelaZap faz por trás" icon="Terminal" />
-          <div className="p-4 bg-slate-900 rounded-b-[1.25rem] font-mono text-xs min-h-[140px] max-h-64 overflow-auto space-y-1.5">
+          <div className="p-4 bg-slate-900 rounded-b-2xl font-mono text-xs min-h-[140px] max-h-64 overflow-auto space-y-1.5">
             {log.length === 0 && <p className="text-slate-500">// aguardando início da simulação…</p>}
             {log.map(l => <p key={l.id} className={cx('fade-up', l.type === 'ok' ? 'text-emerald-400' : l.type === 'warn' ? 'text-amber-400' : 'text-slate-300')}><span className="text-slate-500">[{l.hora}]</span> {l.t}</p>)}
           </div>
@@ -463,9 +608,9 @@ function Simulador({ reviews, setReviews, settings, push }) {
         </div>
       </div>
       <div className="lg:col-span-3 order-1 lg:order-2 flex justify-center">
-        <div className="w-full max-w-[380px]">
-          <div className="rounded-[2.8rem] border-[10px] border-slate-900 bg-slate-900 shadow-phone overflow-hidden relative">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-[1.25rem] z-10" />
+        <div className="w-full max-w-[330px] sm:max-w-[380px] mx-auto">
+          <div className="rounded-[2.2rem] sm:rounded-[2.8rem] border-[6px] sm:border-[10px] border-slate-900 bg-slate-900 shadow-phone overflow-hidden relative w-full">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-slate-900 rounded-b-2xl z-10" />
             <div className="bg-[#075E54] text-white pt-8 pb-3 px-4 flex items-center gap-3">
               <Icon name="ChevronLeft" size={20} />
               <div className="w-9 h-9 rounded-full bg-white/20 grid place-items-center font-bold overflow-hidden">{settings.logo ? <img src={settings.logo} className="w-full h-full object-cover" /> : settings.empresa[0]}</div>
@@ -486,7 +631,7 @@ function Simulador({ reviews, setReviews, settings, push }) {
                 </div>
               ))}
               {typing && <div className="flex"><div className="bg-white rounded-xl rounded-tl-none px-3 py-2.5 shadow-sm flex gap-1"><span className="dot w-2 h-2 rounded-full bg-slate-400" /><span className="dot w-2 h-2 rounded-full bg-slate-400" /><span className="dot w-2 h-2 rounded-full bg-slate-400" /></div></div>}
-              {step === 'aguardando_nota' && !typing && <div className="pt-2 fade-up"><p className="text-center text-[11px] text-slate-600 mb-2">Toque para responder como o cliente:</p><div className="flex justify-center gap-1.5">{[1, 2, 3, 4, 5].map(n => <button key={n} onClick={() => responderNota(n)} className={cx('w-12 h-12 rounded-xl font-bold text-sm shadow-md active:scale-95 hover:scale-110 hover:shadow-lg transition-all duration-300 ease-spring flex flex-col items-center justify-center', n >= 4 ? 'bg-emerald-500 text-white hover:bg-emerald-600' : n === 3 ? 'bg-amber-400 text-white hover:bg-amber-500' : 'bg-red-500 text-white hover:bg-red-600')}><Icon name="Star" size={13} className="fill-white" />{n}</button>)}</div></div>}
+              {step === 'aguardando_nota' && !typing && <div className="pt-2 fade-up"><p className="text-center text-[11px] text-slate-600 mb-2">Toque para responder como o cliente:</p><div className="flex justify-center gap-1.5">{[1, 2, 3, 4, 5].map(n => <button key={n} onClick={() => responderNota(n)} className={cx('w-12 h-12 rounded-xl font-bold text-sm shadow-sm active:scale-95 transition flex flex-col items-center justify-center', n >= 4 ? 'bg-emerald-500 text-white hover:bg-emerald-600' : n === 3 ? 'bg-amber-400 text-white hover:bg-amber-500' : 'bg-red-500 text-white hover:bg-red-600')}><Icon name="Star" size={13} className="fill-white" />{n}</button>)}</div></div>}
               {step === 'finalizado' && <div className="text-center pt-2"><button onClick={iniciar} className="text-xs text-blue-700 underline">Rodar novamente</button></div>}
               <div ref={endRef} />
             </div>
@@ -524,20 +669,20 @@ function Historico({ reviews, setReviews, settings, push }) {
   const exportar = () => { downloadCSV('estrelazap-historico.csv', [['Data', 'Cliente', 'WhatsApp', 'Nota', 'Comentario', 'Status'], ...lista.map(r => [fmtDate(r.data), r.cliente, r.whatsapp, r.nota ?? '', (r.comentario || '').replace(/;/g, ','), STATUS[r.status][0]])]); push('Arquivo CSV exportado', 'success'); };
   const tabs = [['todos', 'Todos'], ['5', '5 estrelas'], ['4', '4 estrelas'], ['neg', 'Insatisfações (1-3)'], ['pend', 'Aguardando']];
   return (
-    <div className="space-y-4 stagger">
+    <div className="space-y-4 fade-up">
       <Card>
         <div className="p-4 flex flex-col md:flex-row md:items-center gap-3 border-b border-slate-100">
-          <div className="flex gap-1 overflow-x-auto pb-1 md:pb-0">{tabs.map(([id, label]) => <button key={id} onClick={() => setFiltro(id)} className={cx('px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition flex items-center gap-1.5', filtro === id ? 'bg-slate-900 text-white shadow-md shadow-slate-900/20' : 'text-slate-600 hover:bg-slate-100')}>{label}<span className={cx('text-[10px] px-1.5 rounded-full', filtro === id ? 'bg-white/20' : 'bg-slate-200')}>{contagem[id]}</span></button>)}</div>
+          <div className="flex gap-1 overflow-x-auto pb-1 md:pb-0">{tabs.map(([id, label]) => <button key={id} onClick={() => setFiltro(id)} className={cx('px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition flex items-center gap-1.5', filtro === id ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100')}>{label}<span className={cx('text-[10px] px-1.5 rounded-full', filtro === id ? 'bg-white/20' : 'bg-slate-200')}>{contagem[id]}</span></button>)}</div>
           <div className="flex-1" />
           <div className="relative"><Icon name="Search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" /><input value={q} onChange={e => setQ(e.target.value)} placeholder="Buscar cliente, telefone…" className="pl-9 pr-3 py-2 rounded-xl border border-slate-200 text-sm w-full md:w-64 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100" /></div>
           <Button variant="secondary" size="sm" icon="Download" onClick={exportar}>Exportar</Button>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50/70 text-slate-500 text-[11px] uppercase tracking-[.12em] font-semibold"><tr><th className="text-left px-5 py-3">Data/Hora</th><th className="text-left px-5 py-3">Cliente</th><th className="text-left px-5 py-3">WhatsApp</th><th className="text-left px-5 py-3">Nota</th><th className="text-left px-5 py-3">Feedback</th><th className="text-left px-5 py-3">Status</th><th className="text-right px-5 py-3">Ações</th></tr></thead>
+            <thead className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wide"><tr><th className="text-left px-5 py-3">Data/Hora</th><th className="text-left px-5 py-3">Cliente</th><th className="text-left px-5 py-3">WhatsApp</th><th className="text-left px-5 py-3">Nota</th><th className="text-left px-5 py-3">Feedback</th><th className="text-left px-5 py-3">Status</th><th className="text-right px-5 py-3">Ações</th></tr></thead>
             <tbody className="divide-y divide-slate-100">
               {slice.map(r => (
-                <tr key={r.id} className={cx('hover:bg-indigo-50/30 transition-colors duration-300', r.status === 'retido' && 'bg-red-50/40')}>
+                <tr key={r.id} className={cx('hover:bg-slate-50', r.status === 'retido' && 'bg-red-50/40')}>
                   <td className="px-5 py-3 text-slate-500 whitespace-nowrap">{fmtDate(r.data)}</td>
                   <td className="px-5 py-3 font-medium text-slate-800 whitespace-nowrap">{r.cliente}<p className="text-xs text-slate-400 font-normal">{r.obs}</p></td>
                   <td className="px-5 py-3 whitespace-nowrap">{r.whatsapp}</td>
@@ -586,7 +731,7 @@ function Config({ settings, setSettings, push }) {
   const preview = fill(form.templates[tpl], { nome_cliente: 'Fernanda', nome_empresa: form.empresa, link_google: form.googleLink });
   const RAMOS = ['Clínica Odontológica', 'Clínica Médica / Estética', 'Restaurante / Pizzaria', 'Oficina Mecânica', 'Salão de Beleza / Barbearia', 'Escritório de Advocacia', 'Pet Shop / Veterinária', 'Loja de Varejo', 'Imobiliária', 'Academia', 'Outro'];
   return (
-    <div className="grid lg:grid-cols-2 gap-6 stagger">
+    <div className="grid lg:grid-cols-2 gap-6 fade-up">
       <div className="space-y-6">
         <Card>
           <CardHeader title="Dados da empresa" sub="Como seus clientes vão ver você" icon="Building2" />
@@ -662,23 +807,25 @@ function Planos({ plan, setPlan, push }) {
   const prox = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 5).toLocaleDateString('pt-BR');
   const ordem = ['start', 'pro', 'multi'];
   return (
-    <div className="space-y-6 stagger">
-      <div className="text-center max-w-2xl mx-auto"><h2 className="font-display text-3xl md:text-4xl font-bold text-slate-900">Escolha o plano ideal para o seu negócio</h2><p className="text-slate-500 mt-2">Sem fidelidade. Cancele quando quiser. Pagamento via PIX ou cartão de crédito com renovação automática.</p></div>
-      <div className="grid md:grid-cols-3 gap-6 items-stretch stagger pt-3">
+    <div className="space-y-6 fade-up">
+      <div className="text-center max-w-2xl mx-auto"><h2 className="text-2xl font-bold text-slate-900">Escolha o plano ideal para o seu negócio</h2><p className="text-slate-500 mt-2">Sem fidelidade. Cancele quando quiser. Pagamento via PIX ou cartão de crédito com renovação automática.</p></div>
+      <div className="grid md:grid-cols-3 gap-5 items-stretch">
         {PLANOS.map(p => { const atual = p.id === plan; const up = ordem.indexOf(p.id) > ordem.indexOf(plan); return (
-          <Card key={p.id} className={cx('p-8 flex flex-col relative hover:-translate-y-1.5 hover:shadow-lift', p.popular && '!border-indigo-200 !ring-4 !ring-indigo-500/10 shadow-lift', atual && 'bg-slate-50')}>
-            {p.popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[11px] font-semibold tracking-wide px-3.5 py-1.5 rounded-full shadow-lg shadow-indigo-600/30">⚡ Mais popular</span>}
-            <div className="flex items-center justify-between"><h3 className="font-display text-xl font-bold text-slate-900">{p.nome}</h3>{atual && <Badge className="bg-emerald-50 text-emerald-700"><Icon name="BadgeCheck" size={12} />Plano atual</Badge>}</div>
+          <Card key={p.id} className={cx('p-6 flex flex-col relative transition hover:shadow-lg', p.popular && 'border-blue-600 ring-4 ring-blue-100', atual && 'bg-slate-50')}>
+            {p.popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">⚡ Mais popular</span>}
+            <div className="flex items-center justify-between"><h3 className="text-lg font-bold text-slate-900">{p.nome}</h3>{atual && <Badge className="bg-emerald-50 text-emerald-700"><Icon name="BadgeCheck" size={12} />Plano atual</Badge>}</div>
             <p className="text-sm text-slate-500 mt-1 min-h-[40px]">{p.desc}</p>
-            <p className="mt-4"><span className="font-display text-5xl font-extrabold text-slate-900">{brl(p.preco)}</span><span className="text-slate-500 text-sm"> /mês</span></p>
+            <p className="mt-4"><span className="text-4xl font-extrabold text-slate-900">{brl(p.preco)}</span><span className="text-slate-500 text-sm"> /mês</span></p>
             <ul className="mt-5 space-y-2.5 text-sm flex-1">{p.itens.map(i => <li key={i} className="flex items-start gap-2 text-slate-700"><Icon name="Check" size={16} className="text-emerald-600 mt-0.5 shrink-0" />{i}</li>)}</ul>
             <Button className="mt-6 w-full" variant={atual ? 'secondary' : p.popular ? 'primary' : 'dark'} disabled={atual} onClick={() => abrir(p)} icon={atual ? 'Check' : up ? 'ArrowUpRight' : 'ArrowDownRight'}>{atual ? 'Plano ativo' : up ? 'Fazer upgrade' : 'Mudar para este plano'}</Button>
           </Card>); })}
       </div>
       <Card>
         <CardHeader title="Faturas" sub={`Próxima cobrança em ${prox}`} icon="Receipt" />
-        <table className="w-full text-sm"><thead className="bg-slate-50/70 text-slate-500 text-[11px] uppercase tracking-[.12em] font-semibold"><tr><th className="text-left px-5 py-3">Fatura</th><th className="text-left px-5 py-3">Data</th><th className="text-left px-5 py-3">Valor</th><th className="text-left px-5 py-3">Status</th><th className="px-5 py-3"></th></tr></thead>
+        <div className="overflow-x-auto w-full">
+          <table className="w-full text-sm min-w-[500px]"><thead className="bg-slate-50 text-slate-500 text-xs uppercase"><tr><th className="text-left px-5 py-3">Fatura</th><th className="text-left px-5 py-3">Data</th><th className="text-left px-5 py-3">Valor</th><th className="text-left px-5 py-3">Status</th><th className="px-5 py-3"></th></tr></thead>
           <tbody className="divide-y divide-slate-100">{fat.map(f => <tr key={f.id}><td className="px-5 py-3 font-medium">{f.id}</td><td className="px-5 py-3 text-slate-500">{f.data}</td><td className="px-5 py-3">{brl(f.valor)}</td><td className="px-5 py-3"><Badge className="bg-emerald-50 text-emerald-700"><Icon name="CheckCircle2" size={12} />{f.status}</Badge></td><td className="px-5 py-3 text-right"><button onClick={() => push('Download da fatura iniciado', 'info')} className="text-blue-600 hover:underline text-xs inline-flex items-center gap-1"><Icon name="Download" size={13} />PDF</button></td></tr>)}</tbody></table>
+        </div>
       </Card>
       <Modal open={!!checkout} onClose={() => setCheckout(null)} title={ok ? 'Pagamento confirmado' : `Assinar plano ${checkout?.nome}`} width="max-w-md">
         {checkout && (ok ? (
@@ -707,6 +854,34 @@ function Planos({ plan, setPlan, push }) {
 
 /* ---------------- APP ---------------- */
 function App() {
+  const [session, setSession] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [authChecked, setAuthChecked] = useState(false);
+  const [skipAuth, setSkipAuth] = useState(false);
+
+  useEffect(() => {
+    if (supabaseClient) {
+      supabaseClient.auth.getSession().then(({ data: { session } }) => {
+        setSession(session);
+        setCurrentUser(session?.user || null);
+        setAuthChecked(true);
+      });
+      const { data: { subscription } } = supabaseClient.auth.onAuthStateChange((_event, session) => {
+        setSession(session);
+        setCurrentUser(session?.user || null);
+      });
+      return () => subscription.unsubscribe();
+    } else {
+      setAuthChecked(true);
+    }
+  }, []);
+
+  const handleLogout = async () => {
+    if (supabaseClient) await supabaseClient.auth.signOut();
+    setSession(null);
+    setCurrentUser(null);
+    setSkipAuth(false);
+  };
   const [state, setState] = useState(() => { try { const s = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (s && Array.isArray(s.reviews) && s.settings?.templates) return s; } catch (e) { } return { settings: DEFAULT_SETTINGS, reviews: seedReviews(), plan: 'pro' }; });
   useEffect(() => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { } }, [state]);
   const [page, setPage] = useState('dashboard');
@@ -720,35 +895,48 @@ function App() {
   const reset = () => { setState({ settings: DEFAULT_SETTINGS, reviews: seedReviews(), plan: 'pro' }); push('Dados de demonstração restaurados', 'info'); };
   const alertas = state.reviews.filter(r => r.status === 'retido').length;
   const titulo = NAV.find(n => n.id === page)?.label;
-  const { settings, reviews, plan } = state;
+    const { settings, reviews, plan } = state;
+
+  if (!authChecked) {
+    return <div className="min-h-screen grid place-items-center bg-slate-50"><div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" /></div>;
+  }
+
+  if (!session && !skipAuth) {
+    return (
+      <AuthScreen
+        onAuthSuccess={(u, s) => { setCurrentUser(u); setSession(s); }}
+        onSkipDemo={() => setSkipAuth(true)}
+      />
+    );
+  }
   return (
     <div className="min-h-screen flex">
       {menu && <div className="fixed inset-0 bg-slate-900/40 z-30 lg:hidden" onClick={() => setMenu(false)} />}
-      <aside className={cx('sidebar relative fixed lg:sticky top-0 h-screen z-40 w-[272px] text-slate-300 flex flex-col transition-transform duration-500 ease-out-expo shrink-0', menu ? 'translate-x-0' : '-translate-x-full lg:translate-x-0')}>
-        <div className="p-6 flex items-center gap-3 border-b border-white/[.06] relative z-10">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-300 via-amber-400 to-orange-500 grid place-items-center shadow-lg shadow-amber-500/40 ring-1 ring-white/25"><Icon name="Star" size={22} className="text-white fill-white" /></div>
-          <div><p className="font-display font-bold text-white text-lg leading-none">EstrelaZap</p><p className="text-[11px] text-slate-400 mt-0.5">Reputação no piloto automático</p></div>
+      <aside className={cx('fixed lg:sticky top-0 h-screen z-40 w-64 bg-slate-900 text-slate-300 flex flex-col transition-transform duration-200 shrink-0', menu ? 'translate-x-0' : '-translate-x-full lg:translate-x-0')}>
+        <div className="p-5 flex items-center gap-3 border-b border-white/10">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 grid place-items-center shadow-lg shadow-amber-500/30"><Icon name="Star" size={22} className="text-white fill-white" /></div>
+          <div><p className="font-bold text-white text-lg leading-none">EstrelaZap</p><p className="text-[11px] text-slate-400 mt-0.5">Reputação no piloto automático</p></div>
           <button className="ml-auto lg:hidden p-1" onClick={() => setMenu(false)}><Icon name="X" size={18} /></button>
         </div>
-        <nav className="p-4 space-y-1.5 flex-1 overflow-y-auto relative z-10">
-          {NAV.map(n => <button key={n.id} onClick={() => go(n.id)} className={cx('w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-medium transition-all duration-300 ease-out-expo relative', page === n.id ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-glow ring-1 ring-white/10' : 'hover:bg-white/[.06] hover:text-white hover:translate-x-0.5')}><Icon name={n.icon} size={18} />{n.label}{n.hot && page !== n.id && <span className="ml-auto text-[10px] bg-amber-400 text-slate-900 font-bold px-1.5 py-0.5 rounded">DEMO</span>}{n.id === 'historico' && alertas > 0 && <span className="ml-auto text-[10px] bg-red-500 text-white font-bold w-5 h-5 grid place-items-center rounded-full">{alertas}</span>}</button>)}
+        <nav className="p-3 space-y-1 flex-1 overflow-y-auto">
+          {NAV.map(n => <button key={n.id} onClick={() => go(n.id)} className={cx('w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition', page === n.id ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30' : 'hover:bg-white/5 hover:text-white')}><Icon name={n.icon} size={18} />{n.label}{n.hot && page !== n.id && <span className="ml-auto text-[10px] bg-amber-400 text-slate-900 font-bold px-1.5 py-0.5 rounded">DEMO</span>}{n.id === 'historico' && alertas > 0 && <span className="ml-auto text-[10px] bg-red-500 text-white font-bold w-5 h-5 grid place-items-center rounded-full">{alertas}</span>}</button>)}
         </nav>
-        <div className="p-4 border-t border-white/[.06] space-y-2 relative z-10">
+        <div className="p-3 border-t border-white/10 space-y-2">
           <div className="rounded-xl bg-white/5 p-3 text-xs"><div className="flex items-center gap-2 mb-1"><span className={cx('w-2 h-2 rounded-full', settings.whatsappStatus === 'conectado' ? 'bg-emerald-400' : 'bg-red-400 animate-pulse')} /><span className="font-medium text-white">WhatsApp {settings.whatsappStatus === 'conectado' ? 'conectado' : 'desconectado'}</span></div><p className="text-slate-400 truncate">{settings.empresa}</p></div>
           <button onClick={reset} className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-slate-400 hover:text-white hover:bg-white/5"><Icon name="RotateCcw" size={14} />Restaurar dados de demonstração</button>
         </div>
       </aside>
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="sticky top-0 z-20 glass border-b border-slate-200/60 px-4 md:px-10 h-[72px] flex items-center gap-3">
+        <header className="sticky top-0 z-20 bg-white/80 backdrop-blur border-b border-slate-200 px-4 md:px-8 h-16 flex items-center gap-3">
           <button className="lg:hidden p-2 -ml-2 rounded-lg hover:bg-slate-100" onClick={() => setMenu(true)}><Icon name="Menu" size={20} /></button>
-          <h1 className="font-display font-semibold text-slate-900 text-xl">{titulo}</h1>
+          <h1 className="font-semibold text-slate-900 text-lg">{titulo}</h1>
           <div className="ml-auto flex items-center gap-2">
             <Badge className={cx('hidden sm:inline-flex', PLANOS.find(p => p.id === plan)?.popular ? 'bg-blue-50 text-blue-700' : 'bg-slate-100 text-slate-700')}><Icon name="Crown" size={12} />Plano {PLANOS.find(p => p.id === plan)?.nome}</Badge>
             <button onClick={() => go('historico')} className="relative p-2 rounded-lg hover:bg-slate-100"><Icon name="Bell" size={20} className="text-slate-600" />{alertas > 0 && <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full grid place-items-center">{alertas}</span>}</button>
-            <div className="flex items-center gap-2 pl-2 border-l border-slate-200"><div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white grid place-items-center text-sm font-bold ring-2 ring-white shadow-md">LL</div><div className="hidden md:block leading-tight"><p className="text-sm font-medium text-slate-800">Lucas Leite</p><p className="text-[11px] text-slate-500">Administrador</p></div></div>
+            <div className="flex items-center gap-2 pl-2 border-l border-slate-200"><div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 text-white grid place-items-center text-sm font-bold">LL</div><div className="hidden md:block leading-tight"><p className="text-sm font-medium text-slate-800">Lucas Leite</p><p className="text-[11px] text-slate-500">Administrador</p></div></div>
           </div>
         </header>
-        <main className="flex-1 p-4 md:p-10 w-full max-w-7xl mx-auto">
+        <main className="flex-1 p-4 md:p-8 w-full max-w-7xl mx-auto">
           {page === 'dashboard' && <Dashboard reviews={reviews} settings={settings} plan={plan} go={go} />}
           {page === 'disparar' && <Disparar reviews={reviews} setReviews={setReviews} settings={settings} push={push} go={go} />}
           {page === 'simulador' && <Simulador reviews={reviews} setReviews={setReviews} settings={settings} push={push} />}
@@ -756,7 +944,7 @@ function App() {
           {page === 'config' && <Config settings={settings} setSettings={setSettings} push={push} />}
           {page === 'planos' && <Planos plan={plan} setPlan={setPlan} push={push} />}
         </main>
-        <footer className="px-8 py-6 text-[11px] text-slate-400 text-center tracking-wide">EstrelaZap © {new Date().getFullYear()} · Multiplique suas avaliações 5 estrelas no Google pelo WhatsApp · Dados conforme LGPD</footer>
+        <footer className="px-8 py-4 text-xs text-slate-400 text-center">EstrelaZap © {new Date().getFullYear()} · Multiplique suas avaliações 5 estrelas no Google pelo WhatsApp · Dados conforme LGPD</footer>
       </div>
       <Toasts toasts={toasts} />
     </div>
